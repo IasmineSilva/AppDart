@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
         title: 'Namer App',
         theme: ThemeData(
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+          colorScheme:
+              ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 56, 34, 255)),
         ),
         home: MyHomePage(),
       ),
@@ -81,8 +82,8 @@ class _MyHomePageState extends State<MyHomePage> {
         throw UnimplementedError('no widget for $selectedIndex');
     }
 
-    // The container for the current page, with its background color
-    // and subtle switching animation.
+    // container da página atual
+
     var mainArea = ColoredBox(
       color: colorScheme.surfaceVariant,
       child: AnimatedSwitcher(
@@ -129,11 +130,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     destinations: [
                       NavigationRailDestination(
                         icon: Icon(Icons.home),
-                        label: Text('Home'),
+                        label: Text('Início'),
                       ),
                       NavigationRailDestination(
                         icon: Icon(Icons.favorite),
-                        label: Text('Favorites'),
+                        label: Text('Favoritos'),
                       ),
                     ],
                     selectedIndex: selectedIndex,
@@ -193,7 +194,7 @@ class GeneratorPage extends StatelessWidget {
                 onPressed: () {
                   appState.getNext();
                 },
-                child: Text('Next'),
+                child: Text('Próximo'),
               ),
             ],
           ),
@@ -225,8 +226,6 @@ class BigCard extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: AnimatedSize(
           duration: Duration(milliseconds: 200),
-          // Make sure that the compound word wraps correctly when the window
-          // is too narrow.
           child: MergeSemantics(
             child: Wrap(
               children: [
@@ -255,7 +254,7 @@ class FavoritesPage extends StatelessWidget {
 
     if (appState.favorites.isEmpty) {
       return Center(
-        child: Text('No favorites yet.'),
+        child: Text('Ainda não há favoritos.'),
       );
     }
 
@@ -264,11 +263,10 @@ class FavoritesPage extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(30),
-          child: Text('You have '
-              '${appState.favorites.length} favorites:'),
+          child: Text('Seus '
+              '${appState.favorites.length} favoritos:'),
         ),
         Expanded(
-          // Make better use of wide windows with a grid.
           child: GridView(
             gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 400,
@@ -326,8 +324,8 @@ class _HistoryListViewState extends State<HistoryListView> {
 
     return ShaderMask(
       shaderCallback: (bounds) => _maskingGradient.createShader(bounds),
-      // This blend mode takes the opacity of the shader (i.e. our gradient)
-      // and applies it to the destination (i.e. our animated list).
+      // Este modo de mesclagem assume a opacidade do shader (ou seja, nosso gradiente)
+      // e aplica-o ao destino (ou seja, nossa lista animada).
       blendMode: BlendMode.dstIn,
       child: AnimatedList(
         key: _key,
